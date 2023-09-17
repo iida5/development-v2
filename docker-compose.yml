@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+
+  web:
+    container_name: web
+    build: 
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - 8001:80
+    volumes:
+      - ./www/web/:/var/www/html
+      - ./www/logs:/var/www/logs
+      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
+
+  web-api:
+    container_name: web-api
+    build: 
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - 8002:80
+    volumes:
+      - ./www/web_api/:/var/www/html
+      - ./www/logs:/var/www/logs
+      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
+
+
+  admin:
+    container_name: admin
+    build: 
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - 8003:80
+    volumes:
+      - ./www/admin/:/var/www/html
+      - ./www/logs:/var/www/logs
+      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
+
+  admin-api:
+    container_name: admin-api
+    build: 
+      context: .
+      dockerfile: ./docker/server/Dockerfile
+    ports:
+      - 8004:80
+    volumes:
+      - ./www/admin_api/:/var/www/html
+      - ./www/logs:/var/www/logs
+      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    ports:
+      - 1433:1433
+    #user: root
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password@sa
+      - MSSQL_PID=Express
+      - MSSQL_LCID=1041
+      - MSSQL_COLLATION=Japanese_CI_AS
+    volumes:
+      - ./db/mssql/data:/var/opt/mssql/data
+      - ./db/mssql/log:/var/opt/mssql/log
+      - ./db/mssql/secrets:/var/opt/mssql/secrets

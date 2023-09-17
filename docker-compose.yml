@@ -60,7 +60,7 @@ services:
     container_name: mssql
     ports:
       - 1433:1433
-    #user: root
+    user: root
     environment:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Password@sa

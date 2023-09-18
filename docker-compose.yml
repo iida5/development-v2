@@ -10,8 +10,7 @@ services:
     ports:
       - 8001:80
     volumes:
-      - ./www/web/:/var/www/html
-      - ./www/logs:/var/www/logs
+      - ./www/web:/var/www/html
       - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./docker/server/php.ini:/usr/local/etc/php/php.ini
 
@@ -23,8 +22,7 @@ services:
     ports:
       - 8002:80
     volumes:
-      - ./www/web_api/:/var/www/html
-      - ./www/logs:/var/www/logs
+      - ./www/web_api:/var/www/html
       - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./docker/server/php.ini:/usr/local/etc/php/php.ini
 
@@ -37,8 +35,7 @@ services:
     ports:
       - 8003:80
     volumes:
-      - ./www/admin/:/var/www/html
-      - ./www/logs:/var/www/logs
+      - ./www/admin:/var/www/html
       - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./docker/server/php.ini:/usr/local/etc/php/php.ini
 
@@ -50,8 +47,7 @@ services:
     ports:
       - 8004:80
     volumes:
-      - ./www/admin_api/:/var/www/html
-      - ./www/logs:/var/www/logs
+      - ./www/admin_api:/var/www/html
       - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./docker/server/php.ini:/usr/local/etc/php/php.ini
 

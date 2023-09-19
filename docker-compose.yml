@@ -2,52 +2,18 @@ version: '3'
 
 services:
 
-  web:
-    container_name: web
+  server:
+    container_name: server
     build: 
       context: .
       dockerfile: ./docker/server/Dockerfile
     ports:
-      - 8001:80
+      - 8001:8001
+      - 8002:8002
+      - 8003:8003
+      - 8004:8004
     volumes:
-      - ./www/web:/var/www/html
-      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
-
-  web-api:
-    container_name: web-api
-    build: 
-      context: .
-      dockerfile: ./docker/server/Dockerfile
-    ports:
-      - 8002:80
-    volumes:
-      - ./www/web_api:/var/www/html
-      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
-
-
-  admin:
-    container_name: admin
-    build: 
-      context: .
-      dockerfile: ./docker/server/Dockerfile
-    ports:
-      - 8003:80
-    volumes:
-      - ./www/admin:/var/www/html
-      - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
-      - ./docker/server/php.ini:/usr/local/etc/php/php.ini
-
-  admin-api:
-    container_name: admin-api
-    build: 
-      context: .
-      dockerfile: ./docker/server/Dockerfile
-    ports:
-      - 8004:80
-    volumes:
-      - ./www/admin_api:/var/www/html
+      - ./www:/var/www
       - ./docker/server/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
       - ./docker/server/php.ini:/usr/local/etc/php/php.ini
 
